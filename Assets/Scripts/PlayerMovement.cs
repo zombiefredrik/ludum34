@@ -15,20 +15,23 @@ public class PlayerMovement : MonoBehaviour {
 	private bool shouldJump = false;
 	private bool shouldDash = false;
 
+	public Animator Animator;
+
 	void Start() {
 		characterController = GetComponent<CharacterController> ();
-
 	}
 
 	float dashTimer = 0f;
-
+	bool wasGrounded = false;
 	void Update () {
 
 		float forwardSpeed = ForwardSpeed;
 
 		if (shouldDash) {
 			dashTimer += Time.deltaTime;
-		}
+			Animator.Play("Dash");
+		} else if (characterController.isGrounded)
+			Animator.Play("Run");
 
 		if (shouldDash && dashTimer < 0.75f)
 			forwardSpeed = 0f;
@@ -38,7 +41,7 @@ public class PlayerMovement : MonoBehaviour {
 			shouldDash = false;
 			dashTimer = 0f;
 		}
-			
+
 		if (Input.GetKeyDown (KeyCode.Alpha0)) {
 			Application.LoadLevel (0);
 		}
@@ -52,16 +55,18 @@ public class PlayerMovement : MonoBehaviour {
 			jumpVelocity = JumpForce;
 			shouldJump = false;
 		}
-			
+
 		Vector3 force = new Vector3 (0f, jumpVelocity, 0);
-		
+
 		//Debug.Log ("Force: " + force);
 		characterController.Move ((Vector3.right * forwardSpeed + force)*Time.deltaTime);
+		wasGrounded = characterController.isGrounded;
 	}
 
 	public void doAction(string action) {
 		if (action == "JUMP" && characterController.isGrounded) {
 			shouldJump = true;
+			Animator.Play("Jump");
 		}
 		if (action == "SHOOT") {
 			//flytta
@@ -74,7 +79,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void OnControllerColliderHit() {
-		
+
 	}
 	public void die() {
 		this.enabled = false;
