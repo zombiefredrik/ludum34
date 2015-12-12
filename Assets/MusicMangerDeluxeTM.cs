@@ -16,6 +16,12 @@ public class MusicMangerDeluxeTM : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		sås.pitch += 0.003f;
+		sås.pitch += 0.0000003f;
 	}
 }
+
+
+/*
+ 120BPM
+ antal samples :
+ */
