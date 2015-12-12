@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour {
 	public Vector2 JumpForce;
 	public KeyCode Button1;
 	public KeyCode Button2;
-	private Rigidbody2D _playerRigidbody;
 	private List<string> _pressedKeys;
+	private Rigidbody2D _playerRigidbody;
 
 	void Start() {
 		this._playerRigidbody = this.GetComponent<Rigidbody2D>();
