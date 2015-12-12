@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour {
 	private Vector3 veloctity = Vector3.zero;
 	public Transform target;
 	
-	void Update () {
+	void FixedUpdate () {
 		this.FollowTarget();
 	}
 
