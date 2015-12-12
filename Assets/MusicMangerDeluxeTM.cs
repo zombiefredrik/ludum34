@@ -24,4 +24,4 @@ public class MusicMangerDeluxeTM : MonoBehaviour {
 /*
  120BPM
  antal samples :
- 
+ */
