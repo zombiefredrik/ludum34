@@ -16,6 +16,5 @@ public class BulletScript : MonoBehaviour {
 	void OnCollisionEnter(Collision col) {
 		Destroy (col.collider.gameObject);
 		Destroy (this.gameObject);
-
 	}
 }

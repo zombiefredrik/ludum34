@@ -37,8 +37,8 @@ public class ActionInputManagerDeluxe : MonoBehaviour {
 		_actions.Add (new Action ("JUMP","LxxxRxxx"));
 		//Rulla
 		_actions.Add (new Action ("ROTFL","RxxxLxxx"));
-		//sHOOT
-		_actions.Add (new Action ("SHOOT","LxLxRxRx"));
+		//DASH
+		_actions.Add (new Action ("DASH","RxRxRxRx"));
 		//SPECIAL
 		_actions.Add (new Action ("SPECIAL","DxLxR"));
 
@@ -80,7 +80,7 @@ public class ActionInputManagerDeluxe : MonoBehaviour {
 		}
 
 		if (ms - lastTömt >= 1000) {
-			Debug.Log ("tömmer");
+			//Debug.Log ("tömmer");
 			lastTömt = ms - (ms % 1000);
 			tömochglöm ();
 		}
