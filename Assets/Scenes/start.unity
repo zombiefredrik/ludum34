@@ -392,6 +392,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Force: {x: 300, y: 0}
+  Button1: 97
+  Button2: 108
 --- !u!50 &1407657089
 Rigidbody2D:
   serializedVersion: 2
