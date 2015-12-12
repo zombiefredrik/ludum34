@@ -712,7 +712,7 @@ Transform:
   - {fileID: 219679480}
   - {fileID: 2103339900}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1001 &334692149
 Prefab:
   m_ObjectHideFlags: 0
@@ -792,6 +792,7 @@ GameObject:
   - 95: {fileID: 355387285}
   - 65: {fileID: 355387289}
   - 54: {fileID: 355387288}
+  - 96: {fileID: 355387290}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -810,7 +811,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1149286225}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!95 &355387285
 Animator:
   serializedVersion: 3
@@ -888,6 +889,53 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.21, y: 2.83, z: 1.99}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!96 &355387290
+TrailRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 355387283}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Time: 1.5
+  m_StartWidth: 1.2
+  m_EndWidth: 0
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 3590324223
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 2415919103
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 1375731711
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 1157627903
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 16777215
+  m_MinVertexDistance: 0.01
+  m_Autodestruct: 0
 --- !u!4 &439829684 stripped
 Transform:
   m_PrefabParentObject: {fileID: 476914, guid: a0964809b81844f72b350db8b6c422d7, type: 2}
@@ -949,7 +997,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.41250214, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &547401589 stripped
 Transform:
   m_PrefabParentObject: {fileID: 476914, guid: a0964809b81844f72b350db8b6c422d7, type: 2}
@@ -1273,6 +1321,8 @@ GameObject:
   - 81: {fileID: 976646281}
   - 114: {fileID: 976646286}
   - 114: {fileID: 976646288}
+  - 114: {fileID: 976646287}
+  - 114: {fileID: 976646289}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1342,11 +1392,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 976646280}
   m_LocalRotation: {x: 0.21769565, y: 0.3460324, z: -0.032302596, w: 0.91204536}
-  m_LocalPosition: {x: -10.2, y: 10.77, z: -13.94}
+  m_LocalPosition: {x: -10.7, y: 11.27, z: -13.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1149286225}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!114 &976646286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1385,6 +1435,35 @@ MonoBehaviour:
   blurAndFlaresShader: {fileID: 4800000, guid: be6e39cf196f146d5be72fbefb18ed75, type: 3}
   brightPassFilterShader: {fileID: 4800000, guid: 0aeaa4cb29f5d4e9c8455f04c8575c8c,
     type: 3}
+--- !u!114 &976646287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976646280}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd70d448b18cfbc46af26466f752332c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualizeFocus: 0
+  focalLength: 10
+  focalSize: 0.42
+  aperture: 0.77
+  focalTransform: {fileID: 355387284}
+  maxBlurSize: 2
+  highResolution: 0
+  blurType: 0
+  blurSampleCount: 2
+  nearBlur: 0
+  foregroundOverlap: 1
+  dofHdrShader: {fileID: 4800000, guid: acd613035ff3e455e8abf23fdc8c8c24, type: 3}
+  dx11BokehShader: {fileID: 4800000, guid: d8e82664aa8686642a424c88ab10164a, type: 3}
+  dx11BokehThreshold: 0.5
+  dx11SpawnHeuristic: 0.0875
+  dx11BokehTexture: {fileID: 2800000, guid: a4cdca73d61814d33ac1587f6c163bca, type: 3}
+  dx11BokehScale: 1.2
+  dx11BokehIntensity: 2.5
 --- !u!114 &976646288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1408,6 +1487,19 @@ MonoBehaviour:
   separableBlurShader: {fileID: 4800000, guid: e97c14fbb5ea04c3a902cc533d7fc5d1, type: 3}
   chromAberrationShader: {fileID: 4800000, guid: 2b4f29398d9484ccfa9fd220449f5eee,
     type: 3}
+--- !u!114 &976646289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976646280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf4c3f33fcfe4c5aaf6566ed644b364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DampTime: 1.2
+  target: {fileID: 355387284}
 --- !u!1001 &1009271862
 Prefab:
   m_ObjectHideFlags: 0
@@ -1667,10 +1759,9 @@ Transform:
   m_LocalPosition: {x: -0.5, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 976646285}
   - {fileID: 355387284}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &1149286226
 MonoBehaviour:
   m_ObjectHideFlags: 0
