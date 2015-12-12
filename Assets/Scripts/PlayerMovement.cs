@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour {
 	public float JumpForce = 10f;
 	public float Gravity = 9.82f;
 
+	public LayerMask GroundMask;
+
 	public GameObject bullet;
 	public Vector3 bulletSpeed;
 	CharacterController characterController;
@@ -24,33 +26,32 @@ public class PlayerMovement : MonoBehaviour {
 	float dashTimer = 0f;
 	bool wasGrounded = false;
 	void Update () {
+		if (Input.GetKeyDown (KeyCode.Alpha0)) {
+			Application.LoadLevel (0);
+		}
 
+		bool grounded = Physics.Raycast(new Ray(transform.position, Vector3.down), 1.0f, GroundMask);
+		Debug.DrawRay(transform.position, Vector3.down, !grounded ? Color.red : Color.green);
 		float forwardSpeed = ForwardSpeed;
 
 		if (shouldDash) {
 			dashTimer += Time.deltaTime;
 			Animator.Play("Dash");
-		} else if (characterController.isGrounded)
+		} else if (grounded) {
 			Animator.Play("Run");
+		}
 
-		if (shouldDash && dashTimer < 0.75f)
+		if (shouldDash && dashTimer < 0.75f) {
 			forwardSpeed = 0f;
-		else if (shouldDash && dashTimer < 1.0f && dashTimer > 0.75f)
+		} else if (shouldDash && dashTimer < 1.0f && dashTimer > 0.75f) {
 			forwardSpeed = ForwardSpeed * 4f;
-		else if (shouldDash && dashTimer > 1.0f) {
+		} else if (shouldDash && dashTimer > 1.0f) {
 			shouldDash = false;
 			dashTimer = 0f;
 		}
 
-		if (Input.GetKeyDown (KeyCode.Alpha0)) {
-			Application.LoadLevel (0);
-		}
+		jumpVelocity -= Gravity * Time.deltaTime;
 
-		if (characterController.isGrounded) {
-			jumpVelocity = 0f;
-		} else {
-			jumpVelocity -= Gravity * Time.deltaTime;
-		}
 		if (shouldJump) {
 			jumpVelocity = JumpForce;
 			shouldJump = false;
@@ -60,11 +61,13 @@ public class PlayerMovement : MonoBehaviour {
 
 		//Debug.Log ("Force: " + force);
 		characterController.Move ((Vector3.right * forwardSpeed + force)*Time.deltaTime);
-		wasGrounded = characterController.isGrounded;
+		wasGrounded = grounded;
 	}
 
 	public void doAction(string action) {
-		if (action == "JUMP" && characterController.isGrounded) {
+		bool grounded = Physics.Raycast(new Ray(transform.position, Vector3.down), 1.0f, GroundMask);
+
+		if (action == "JUMP") {
 			shouldJump = true;
 			Animator.Play("Jump");
 		}
