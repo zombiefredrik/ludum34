@@ -6,49 +6,38 @@ public class PlayerMovement : MonoBehaviour {
 
 	public Vector2 ForwardForce;
 	public Vector2 JumpForce;
-	public KeyCode Button1;
-	public KeyCode Button2;
-	private List<string> _pressedKeys;
-	private Rigidbody2D _playerRigidbody;
+	private Rigidbody _playerRigidbody;
+	public GameObject bullet;
+	public Vector3 bulletSpeed;
 
 	void Start() {
-		this._playerRigidbody = this.GetComponent<Rigidbody2D>();
-		this._pressedKeys = new List<string>();
+		this._playerRigidbody = this.GetComponent<Rigidbody>();
 	}
 
 	void Update () {
-		this.ListenForKeys();
+		
+	}
+
+	public void doAction(string action) {
+		if (action == "JUMP") {
+			this._playerRigidbody.AddForce(this.JumpForce);
+		}
+		if (action == "SHOOT") {
+			//flytta
+			GameObject zeBullet = Instantiate(bullet,transform.position, Quaternion.identity) as GameObject;
+			zeBullet.GetComponent<Rigidbody> ().AddForce (bulletSpeed);
+		}
+	}
+	public void die() {
+		this.enabled = false;
+		Debug.LogError ("DIEDEIDIEIDEI"); //TODO: dö
 	}
 
 	void FixedUpdate() {
 		this.MovePlayer();
 	}
 
-	private void ListenForKeys() {
-		if(Input.GetKeyDown(this.Button1) ) {
-			this._pressedKeys.Add(this.Button1.ToString());
-		}
-		if(Input.GetKeyDown(this.Button2)) {
-			this._pressedKeys.Add(this.Button2.ToString());
-		}
-	}
-
 	private void MovePlayer() {
-		if(this._pressedKeys.Count >= 2) {
-			var press1 = this._pressedKeys[this._pressedKeys.Count - 2];
-			var press2 = this._pressedKeys[this._pressedKeys.Count - 1];
-			if(press1 == this.Button1.ToString() && press2 == this.Button2.ToString()) {
-				this._playerRigidbody.AddForce(this.ForwardForce);
-				this._pressedKeys.Clear();
-			}
-		}
-		if(this._pressedKeys.Count >= 2) {
-			var press1 = this._pressedKeys[this._pressedKeys.Count - 2];
-			var press2 = this._pressedKeys[this._pressedKeys.Count - 1];
-			if(press1 == this.Button2.ToString() && press2 == this.Button2.ToString()) {
-				this._playerRigidbody.AddForce(this.JumpForce);
-				this._pressedKeys.Clear();
-			}
-		}
+		this._playerRigidbody.AddForce(this.ForwardForce);
 	}
 }

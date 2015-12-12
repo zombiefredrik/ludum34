@@ -20,8 +20,13 @@ public class ActionInputManagerDeluxe : MonoBehaviour {
 	private List<Action> _actions;
 	private int lastTömt  = 0;
 
+	public PlayerMovement playerMovement;
+
 	// Use this for initialization
 	void Start () {
+
+		this.playerMovement = this.GetComponent<PlayerMovement> ();
+
 		this._pressedAKeys = new List<int>();
 		this._pressedBKeys = new List<int>();
 		this.tmpAKeys = new List<int> ();
@@ -104,6 +109,8 @@ public class ActionInputManagerDeluxe : MonoBehaviour {
 				}
 				if (delta <= 125 * (a.atimes.Count + a.btimes.Count)) {
 					Debug.LogError ("DOING: " + a.name);
+					playerMovement.doAction (a.name);
+
 				}
 			}
 
