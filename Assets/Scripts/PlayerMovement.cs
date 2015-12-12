@@ -35,16 +35,16 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void MovePlayer() {
 		if(this._pressedKeys.Count >= 2) {
-			var press1 = this._pressedKeys[0];
-			var press2 = this._pressedKeys[1];
+			var press1 = this._pressedKeys[this._pressedKeys.Count - 2];
+			var press2 = this._pressedKeys[this._pressedKeys.Count - 1];
 			if(press1 == this.Button1.ToString() && press2 == this.Button2.ToString()) {
 				this._playerRigidbody.AddForce(this.ForwardForce);
 				this._pressedKeys.Clear();
 			}
 		}
 		if(this._pressedKeys.Count >= 2) {
-			var press1 = this._pressedKeys[0];
-			var press2 = this._pressedKeys[1];
+			var press1 = this._pressedKeys[this._pressedKeys.Count - 2];
+			var press2 = this._pressedKeys[this._pressedKeys.Count - 1];
 			if(press1 == this.Button2.ToString() && press2 == this.Button2.ToString()) {
 				this._playerRigidbody.AddForce(this.JumpForce);
 				this._pressedKeys.Clear();
