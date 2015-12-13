@@ -8,7 +8,7 @@ public class ActionInputManagerDeluxe : MonoBehaviour {
 	public string keyInput;
 	public int bpm = 120;
 	public float time = 0f;
-	public int ms, p, i;
+	public int ms, p, i, k;
 	public bool isAPressed = false;
 	public bool isBPressed = false;
 	public GameObject kub;
@@ -19,6 +19,7 @@ public class ActionInputManagerDeluxe : MonoBehaviour {
 	private List<int> tmpBKeys;
 	private List<Action> _actions;
 	private int lastTömt  = 0;
+	private int lastBling = 0;
 
 	public PlayerMovement playerMovement;
 
@@ -51,7 +52,7 @@ public class ActionInputManagerDeluxe : MonoBehaviour {
 		GUI.Label (new Rect (10, 50, 400, 20), "B:" + string.Join(",", _pressedBKeys.Select(x => x.ToString()).ToArray()));
 		GUI.Label (new Rect (10, 70, 400, 20), "A:" + string.Join(",", tmpAKeys.Select(x => x.ToString()).ToArray()));
 		GUI.Label (new Rect (10, 100, 400, 20), "B:" + string.Join(",", tmpBKeys.Select(x => x.ToString()).ToArray()));
-		GUI.Label (new Rect (10, 120, 400, 20), "ms:" + ms + "p:" + p + "lastTömt:" + lastTömt );
+		GUI.Label (new Rect (10, 120, 400, 20), "ms:" + ms + "p:" + p + "lastTömt:" + lastTömt + " k:" + k);
 	}
 		
 	void Update () {
@@ -60,6 +61,7 @@ public class ActionInputManagerDeluxe : MonoBehaviour {
 
 		ms = (int)(time * 1000); //overflow FIXME
 		p = ms % 1000;
+
 
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			if (!isAPressed) {
@@ -82,20 +84,26 @@ public class ActionInputManagerDeluxe : MonoBehaviour {
 		if (ms - lastTömt >= 1000) {
 			//Debug.Log ("tömmer");
 			lastTömt = ms - (ms % 1000);
-			tömochglöm ();
+			tömochglöm (true);
 		}
 
-	
-	
+		if (ms - lastBling >= 125 ) {
+			kub.SetActive (!kub.active);
+			lastBling = ms - (ms % 125);
+			if(k++ >= 8) k = 1;
+			tömochglöm (false);
 
+		} 
+	
 	}
 
-	void tömochglöm() {
+	void tömochglöm(bool shouldTöm) {
 		tmpAKeys = new List<int> (_pressedAKeys);
 		tmpBKeys = new List<int> (_pressedBKeys);
-		_pressedAKeys.Clear ();
-		_pressedBKeys.Clear ();
-		kub.SetActive (!kub.active);
+		if (shouldTöm) {
+			_pressedAKeys.Clear ();
+			_pressedBKeys.Clear ();
+		}
 
 
 		foreach (Action a in _actions) {
@@ -107,7 +115,7 @@ public class ActionInputManagerDeluxe : MonoBehaviour {
 				for (int i = 0; i < a.btimes.Count; i++) {
 					delta += Mathf.Abs(a.btimes [i] - tmpBKeys [i]);
 				}
-				if (delta <= 125 * (a.atimes.Count + a.btimes.Count)) {
+				if (delta <= 150 * (a.atimes.Count + a.btimes.Count)) {
 					Debug.LogError ("DOING: " + a.name);
 					playerMovement.doAction (a.name);
 
