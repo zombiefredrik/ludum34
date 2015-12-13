@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour {
-
+	public bool Dead = false;
 	public float ForwardSpeed = 4f;
 	public float JumpForce = 10f;
 	public float Gravity = 9.82f;
@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 	private bool shouldJump = false;
 	public bool shouldDash = false;
 
+	public ParticleSystem DashParticles;
 	public Animator Animator;
 
 	void Start() {
@@ -30,6 +31,9 @@ public class PlayerMovement : MonoBehaviour {
 			Application.LoadLevel (0);
 		}
 
+		if (Dead)
+			return;
+
 		bool grounded = Physics.Raycast(new Ray(transform.position, Vector3.down), 0.6f, GroundMask);
 		Debug.DrawRay(transform.position, Vector3.down, !grounded ? Color.red : Color.green);
 		float forwardSpeed = ForwardSpeed;
@@ -37,8 +41,12 @@ public class PlayerMovement : MonoBehaviour {
 		if (shouldDash) {
 			dashTimer += Time.deltaTime;
 			Animator.Play("Dash");
+			DashParticles.enableEmission = true;
 		} else if (grounded) {
 			Animator.Play("Run");
+			DashParticles.enableEmission = false;
+		} else {
+			Animator.Play("Jump");
 		}
 
 		if (shouldDash && dashTimer < 0.75f) {
@@ -72,7 +80,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (action == "JUMP" && grounded) {
 				shouldJump = true;
-				Animator.Play ("Jump");
+				Animator.Play("Jump");
 		}
 		if (action == "SWITCH") {
 
@@ -87,7 +95,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 	public void die() {
-		this.enabled = false;
+		Dead = true;
 		Debug.LogError ("DIEDEIDIEIDEI"); //TODO: dö
 	}
 
