@@ -18,12 +18,11 @@ public class GoodStuffToPickup : MonoBehaviour {
 		animator.Play("PickupPickup");
 		Destroy(gameObject,0.5f);
 
-		PlayerMovement player = col.collider.gameObject.transform.parent.GetComponent<PlayerMovement> ();
+		PlayerMovement player = other.gameObject.transform.parent.GetComponent<PlayerMovement> ();
 
 		if (player == null)
 			return;
 
-		player.GivePoints (itemValue);
-		 
+		player.GivePoints(itemValue);
 	}
 }

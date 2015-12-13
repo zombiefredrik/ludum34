@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,6 +10,8 @@ public class PlayerMovement : MonoBehaviour {
 	public float Gravity = 9.82f;
 	public int Score = 0;
 
+	public Text ScoreText;
+
 	public LayerMask GroundMask;
 
 	public GameObject bullet;
@@ -17,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float jumpVelocity = 0f;
 	private bool shouldJump = false;
 	public bool shouldDash = false;
-	private float allowedToDash = true;
+	private bool allowedToDash = true;
 
 
 	public ParticleSystem DashParticles;
@@ -33,6 +36,8 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Alpha0)) {
 			Application.LoadLevel (0);
 		}
+
+		ScoreText.text = Score.ToString();
 
 		if (Dead)
 			return;
@@ -92,10 +97,10 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (action == "DASH" && allowedToDash) {
 			shouldDash = true;
-		} 
+		}
 	}
 
-	void GivePoints(int numPoints) {
+	public void GivePoints(int numPoints) {
 		Score += numPoints;
 	}
 
