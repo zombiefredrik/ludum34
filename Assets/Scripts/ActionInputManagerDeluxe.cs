@@ -14,6 +14,7 @@ public class ActionInputManagerDeluxe : MonoBehaviour
 	public bool isBPressed = false;
 	public GameObject kub;
 	public AudioSource bongo1, bongo2;
+	public Transform cirkeltarta;
 
 	private List<int> _pressedAKeys;
 	private List<int> _pressedBKeys;
@@ -95,6 +96,7 @@ public class ActionInputManagerDeluxe : MonoBehaviour
 			lastBling = ms - (ms % 125);
 			if (k++ >= 8)
 				k = 1;
+			cirkeltarta.transform.rotation = Quaternion.AngleAxis (k * 45, Vector3.back);
 			tömochglöm (false);
 		} 
 	
