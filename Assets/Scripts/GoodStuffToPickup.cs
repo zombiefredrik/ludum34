@@ -15,7 +15,7 @@ public class GoodStuffToPickup : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (pickedUp)
+		if (pickedUp || ljud == null)
 			return;
 
 		ljud.PlayOneShot(Random.value > 0.5 ? clips[0] : clips[1]);

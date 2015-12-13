@@ -38,4 +38,8 @@ public class Level : MonoBehaviour {
         previous = p;
     }
 
+    public void Pop() {
+        Destroy(transform.GetChild(0).gameObject, 0.1f);
+    }
+
 }
