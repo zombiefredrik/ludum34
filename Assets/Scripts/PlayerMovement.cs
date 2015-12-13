@@ -37,8 +37,11 @@ public class PlayerMovement : MonoBehaviour {
 	float dashTimer = 0f;
 	bool wasGrounded = false;
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Alpha0)) {
-			Application.LoadLevel (0);
+		if (Input.GetButton("Restart")) {
+			Application.LoadLevel(1);
+		}
+		if (Input.GetButton("Menu")) {
+			Application.LoadLevel(0);
 		}
 
 		ScoreText.text = Score.ToString();
