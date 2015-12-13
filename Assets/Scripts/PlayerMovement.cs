@@ -74,10 +74,9 @@ public class PlayerMovement : MonoBehaviour {
 				shouldJump = true;
 				Animator.Play ("Jump");
 		}
-		if (action == "SHOOT") {
-			//flytta
-			GameObject zeBullet = Instantiate(bullet,transform.position, Quaternion.identity) as GameObject;
-			zeBullet.GetComponent<Rigidbody> ().AddForce (bulletSpeed);
+		if (action == "SWITCH") {
+
+			Debug.LogError ("Byter");
 		}
 		if (action == "DASH") {
 			shouldDash = true;
