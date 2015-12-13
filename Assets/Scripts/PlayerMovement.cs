@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 	public float ForwardSpeed = 4f;
 	public float JumpForce = 10f;
 	public float Gravity = 9.82f;
+	public int Score = 0;
 
 	public LayerMask GroundMask;
 
@@ -16,6 +17,8 @@ public class PlayerMovement : MonoBehaviour {
 	private float jumpVelocity = 0f;
 	private bool shouldJump = false;
 	public bool shouldDash = false;
+	private float allowedToDash = true;
+
 
 	public ParticleSystem DashParticles;
 	public Animator Animator;
@@ -79,21 +82,23 @@ public class PlayerMovement : MonoBehaviour {
 		bool grounded = Physics.Raycast(new Ray(transform.position, Vector3.down), 0.6f, GroundMask);
 
 		if (action == "JUMP" && grounded) {
-				shouldJump = true;
-				Animator.Play("Jump");
+			shouldJump = true;
+			Animator.Play("Jump");
+			allowedToDash = true;
 		}
 		if (action == "SWITCH") {
-
+			allowedToDash = true;
 			Debug.LogError ("Byter");
 		}
-		if (action == "DASH") {
+		if (action == "DASH" && allowedToDash) {
 			shouldDash = true;
-		}
+		} 
 	}
 
-	public void OnControllerColliderHit() {
-
+	void GivePoints(int numPoints) {
+		Score += numPoints;
 	}
+
 	public void die() {
 		Dead = true;
 		Debug.LogError ("DIEDEIDIEIDEI"); //TODO: dö

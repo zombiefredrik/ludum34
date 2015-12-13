@@ -17,5 +17,13 @@ public class GoodStuffToPickup : MonoBehaviour {
 		ljud.Play ();
 		animator.Play("PickupPickup");
 		Destroy(gameObject,0.5f);
+
+		PlayerMovement player = col.collider.gameObject.transform.parent.GetComponent<PlayerMovement> ();
+
+		if (player == null)
+			return;
+
+		player.GivePoints (itemValue);
+
 	}
 }
