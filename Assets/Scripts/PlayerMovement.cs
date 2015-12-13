@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour {
 			Application.LoadLevel (0);
 		}
 
-		bool grounded = Physics.Raycast(new Ray(transform.position, Vector3.down), 1.0f, GroundMask);
+		bool grounded = Physics.Raycast(new Ray(transform.position, Vector3.down), 0.6f, GroundMask);
 		Debug.DrawRay(transform.position, Vector3.down, !grounded ? Color.red : Color.green);
 		float forwardSpeed = ForwardSpeed;
 
@@ -50,7 +50,10 @@ public class PlayerMovement : MonoBehaviour {
 			dashTimer = 0f;
 		}
 
-		jumpVelocity -= Gravity * Time.deltaTime;
+		if (!grounded || shouldJump)
+			jumpVelocity -= Gravity * Time.deltaTime;
+		else
+			jumpVelocity = 0;
 
 		if (shouldJump) {
 			jumpVelocity = JumpForce;
@@ -65,7 +68,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void doAction(string action) {
-		bool grounded = Physics.Raycast(new Ray(transform.position, Vector3.down), 1.0f, GroundMask);
+		bool grounded = Physics.Raycast(new Ray(transform.position, Vector3.down), 0.6f, GroundMask);
 
 		if (action == "JUMP" && grounded) {
 				shouldJump = true;
