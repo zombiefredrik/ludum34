@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour {
 			dashTimer = 0f;
 		}
 
-		if (!grounded || shouldJump)
+		if ((!grounded || shouldJump) && !shouldDash)
 			jumpVelocity -= Gravity * Time.deltaTime;
 		else
 			jumpVelocity = 0;
