@@ -24,6 +24,6 @@ public class GoodStuffToPickup : MonoBehaviour {
 			return;
 
 		player.GivePoints (itemValue);
-
+		 
 	}
 }
