@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	public ParticleSystem DashParticles;
 	public Animator Animator;
+	public AudioSource DashSound;
 
 	void Start() {
 		characterController = GetComponent<CharacterController> ();
@@ -100,6 +101,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		if (action == "DASH" && allowedToDash) {
 			shouldDash = true;
+			DashSound.Play();
 		}
 	}
 
