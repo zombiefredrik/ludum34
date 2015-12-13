@@ -75,6 +75,7 @@ public class ActionInputManagerDeluxe : MonoBehaviour
 			//SPELA LJUD
 			bongo1.Play ();
 			this._pressedAKeys.Add (p);
+			playerMovement.doAction ("JUMP");
 
 		}
 		
@@ -83,6 +84,7 @@ public class ActionInputManagerDeluxe : MonoBehaviour
 			//SPELA LJUD
 			bongo2.Play ();
 			this._pressedBKeys.Add (p);
+			playerMovement.doAction ("DASH");
 		}
 
 		if (ms - lastTömt >= 1000) {
@@ -92,11 +94,11 @@ public class ActionInputManagerDeluxe : MonoBehaviour
 		}
 
 		if (ms - lastBling >= 125) {
-			kub.SetActive (!kub.active);
+
 			lastBling = ms - (ms % 125);
 			if (k++ >= 8)
 				k = 1;
-			cirkeltarta.transform.rotation = Quaternion.AngleAxis (k * 45, Vector3.back);
+
 			tömochglöm (false);
 		} 
 	

@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	CharacterController characterController;
 	private float jumpVelocity = 0f;
 	private bool shouldJump = false;
-	private bool shouldDash = false;
+	public bool shouldDash = false;
 
 	public Animator Animator;
 

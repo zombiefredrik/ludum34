@@ -3,20 +3,24 @@ using System.Collections;
 
 public class BadStuffCollider : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public bool isAKiller = true;
 
 	void OnCollisionEnter(Collision col) {
-		PlayerMovement player = col.collider.gameObject.GetComponent<PlayerMovement> ();
+
+		PlayerMovement player = col.collider.gameObject.transform.parent.GetComponent<PlayerMovement> ();
+
 		if (player == null)
 			return;
-		player.die ();
+
+		if (!player.shouldDash && isAKiller) {
+			player.die ();
+		} else {
+			isAKiller = false;
+			foreach (Transform box in transform.parent) {
+				BadStuffCollider bsc = box.GetComponent<BadStuffCollider> ();
+				bsc.isAKiller = false;
+			}
+
+		}
 	}
 }
