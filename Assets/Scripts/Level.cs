@@ -29,7 +29,7 @@ public class Level : MonoBehaviour {
 
     Transform previous;
     public void Generate() {
-        Transform p = (from k in possible where k != previous orderby Random.value select k).First();
+        Transform p = (from k in possible where (k != previous && possible.IndexOf(k) <= Count) orderby Random.value select k).First();
         Transform t = Instantiate(p, Next, p.transform.rotation) as Transform;
         t.SetParent(transform);
         Next = t.FindChild("Next").transform.position;

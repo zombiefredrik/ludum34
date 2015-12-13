@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour {
 
 	public LayerMask GroundMask;
 
+	public Transform DeathText;
+	public Transform Cube;
+
 	public GameObject bullet;
 	public Vector3 bulletSpeed;
 	CharacterController characterController;
@@ -105,8 +108,12 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void die() {
+		if (Dead)
+			return;
+
 		Dead = true;
-		Debug.LogError ("DIEDEIDIEIDEI"); //TODO: dö
+		DeathText.gameObject.SetActive(true);
+		Animator.Play("Die");
 	}
 
 	void FixedUpdate() {

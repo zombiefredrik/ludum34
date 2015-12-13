@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a7b368e5a6f43e48d643b5c4e43f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathOnDash: 0
   isAKiller: 1
 --- !u!114 &11462610
 MonoBehaviour:
@@ -329,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a7b368e5a6f43e48d643b5c4e43f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathOnDash: 0
   isAKiller: 1
 --- !u!114 &11478416
 MonoBehaviour:
@@ -341,6 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a7b368e5a6f43e48d643b5c4e43f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathOnDash: 0
   isAKiller: 1
 --- !u!1001 &100100000
 Prefab:
@@ -348,7 +351,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: DeathOnDash
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 145426}

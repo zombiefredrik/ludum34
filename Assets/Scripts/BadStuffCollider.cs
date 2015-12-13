@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BadStuffCollider : MonoBehaviour {
-
+	public bool DeathOnDash = true;
 	public bool isAKiller = true;
 
 	void OnCollisionEnter(Collision col) {
@@ -12,7 +12,7 @@ public class BadStuffCollider : MonoBehaviour {
 		if (player == null)
 			return;
 
-		if (!player.shouldDash && isAKiller) {
+		if ((!player.shouldDash || DeathOnDash) && isAKiller) {
 			player.die ();
 		} else {
 			isAKiller = false;

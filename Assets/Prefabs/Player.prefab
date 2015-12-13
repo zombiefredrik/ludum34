@@ -496,11 +496,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Dead: 0
   ForwardSpeed: 8
-  JumpForce: 10
-  Gravity: 20
+  JumpForce: 13
+  Gravity: 30
+  Score: 0
+  ScoreText: {fileID: 0}
   GroundMask:
     serializedVersion: 2
     m_Bits: 512
+  DeathText: {fileID: 0}
+  Cube: {fileID: 486072}
   bullet: {fileID: 105954, guid: cdcd6bd770e9c4d6ab44f27058d9c621, type: 2}
   bulletSpeed: {x: 1000, y: 0, z: 0}
   shouldDash: 0

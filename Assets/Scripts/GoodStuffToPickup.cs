@@ -3,7 +3,8 @@ using System.Collections;
 
 public class GoodStuffToPickup : MonoBehaviour {
 	public int itemValue = 1;
-
+	public bool pickedUp = false;
+	public AudioClip[] clips;
 	private AudioSource ljud;
 	Animator animator;
 
@@ -14,7 +15,10 @@ public class GoodStuffToPickup : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		ljud.Play ();
+		if (pickedUp)
+			return;
+
+		ljud.PlayOneShot(Random.value > 0.5 ? clips[0] : clips[1]);
 		animator.Play("PickupPickup");
 		Destroy(gameObject,0.5f);
 
@@ -23,9 +27,10 @@ public class GoodStuffToPickup : MonoBehaviour {
 
 		PlayerMovement player = other.gameObject.transform.parent.GetComponent<PlayerMovement> ();
 
-		if (player == null)
+		if (player == null || player.Dead)
 			return;
 
 		player.GivePoints(itemValue);
+		pickedUp = true;
 	}
 }
