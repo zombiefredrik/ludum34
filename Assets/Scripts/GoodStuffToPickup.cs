@@ -18,6 +18,9 @@ public class GoodStuffToPickup : MonoBehaviour {
 		animator.Play("PickupPickup");
 		Destroy(gameObject,0.5f);
 
+		if (other.gameObject.transform.parent == null)
+			return;
+
 		PlayerMovement player = other.gameObject.transform.parent.GetComponent<PlayerMovement> ();
 
 		if (player == null)
