@@ -67,9 +67,9 @@ public class PlayerMovement : MonoBehaviour {
 	public void doAction(string action) {
 		bool grounded = Physics.Raycast(new Ray(transform.position, Vector3.down), 1.0f, GroundMask);
 
-		if (action == "JUMP") {
-			shouldJump = true;
-			Animator.Play("Jump");
+		if (action == "JUMP" && grounded) {
+				shouldJump = true;
+				Animator.Play ("Jump");
 		}
 		if (action == "SHOOT") {
 			//flytta
